@@ -119,11 +119,11 @@ class Connection:
         self.rx_timestamps.clear()
 
     def notification_handler(self, sender: str, data: Any):
-        self.rx_data.append(int.from_bytes(data, byteorder="big"))
+        #self.rx_data.append(int.from_bytes(data, byteorder="big"))
         self.record_time_info()
-        if len(self.rx_data) >= self.dump_size:
-            self.data_dump_handler(str(self.rx_timestamps[-1].time()) + " " + data.decode("utf-8"))
-            self.clear_lists()
+        #if len(self.rx_data) >= self.dump_size:
+        self.data_dump_handler(str(self.rx_timestamps[-1].time()) + " " + data.decode("utf-8"))
+        self.clear_lists()
 
 
 #############
@@ -137,8 +137,8 @@ async def user_console_manager(connection: Connection):
 async def main():
     while True:
         # YOUR APP CODE WOULD GO HERE.
-        await asyncio.sleep(0.5)
-
+        # await asyncio.sleep(0.5)
+        pass
 
 #############
 # App Main
@@ -156,8 +156,8 @@ if __name__ == "__main__":
 
     try:
         asyncio.ensure_future(connection.manager())
-        asyncio.ensure_future(user_console_manager(connection))
-        asyncio.ensure_future(main())
+        # asyncio.ensure_future(user_console_manager(connection))
+        # asyncio.ensure_future(main())
         loop.run_forever()
     except KeyboardInterrupt:
         print()
